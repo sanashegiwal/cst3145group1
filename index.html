@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEEK 6 LAB</title>
+    <script src="https://unpkg.com/vue"> </script>
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>{{sitename}}</h1> <!-- The sitename is called from the vue object -->
+        </header>
+        <main>
+            <figure>
+                <img v-bind:src="product.image" width="250" height="200">
+            </figure>
+            <h2 v-html="product.title"></h2> <!-- The fields are called in these html elements to output the data -->
+            <P>Location: {{product.location}}</P>
+            <p>Price: {{product.price}}</p>
+            <P>Product I.d: {{product.id}}</P>
+            <P>Number of spaces: {{product.availableInventory}}</P>
+            <button v-on:click="removefromcart"> Add to cart </button> <!-- The function will be called when clicking this button here -->
+        </main>
+    </div>
+    
+
+    <script type="text/javascript">
+
+    //This is the Javsscript vue object.
+    var webstore = new Vue({
+        el:"#app",  //This app is refered to the div id on the top.
+        data: { //Below are the fields where data has been inserted. 
+            sitename: "Music School Club",
+            product: {
+                id: 1001,
+                title: "<b>Music</b>",
+                location: "London",
+                price: 100,
+                image: "music.jpg",
+                availableInventory: 5
+            },
+            
+        },
+        methods:{   //This is a function which is used to find out if the item is greater or less than zero.
+            removefromcart: function(){
+                if(this.product.availableInventory>0){  //If product is less then zero then minus the quantity by 1.
+                    this.product.availableInventory = this.product.availableInventory - 1;
+                
+                }
+                else{   //when the product is not greater than zero then alert the users that its zero and you can't add more.
+                    alert("Already zero")
+                }
+            }
+        },
+        
+    });
+
+    </script>
+    
+</body>
+</html>
